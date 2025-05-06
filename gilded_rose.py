@@ -53,16 +53,21 @@ class GildedRose(object):
         if item.quality < self.DEFAULT_MAX_QUALITY:
           item.quality = item.quality + self.DEFAULT_DEGRADE_QUALITY
     
+    def _update_item_quality(self, item):
+      if item.name == self.AGED_BRIE or item.name == self.BACKSTAGE_PASSES:
+        self._update_quality_aged_brie_and_backstage_passes(item)
+      else:
+        self._update_quality_all(item)
+      if item.name != self.SULFURAS:
+        item.sell_in = item.sell_in - self.DEFAULT_DEGRADE_SELL_IN
+      if item.sell_in < self.SELL_IN_ZERO:
+        self._update_quality_nagative_sell_in(item)
+
     def update_quality(self):
         for item in self.items:
-            if item.name == self.AGED_BRIE or item.name == self.BACKSTAGE_PASSES:
-              self._update_quality_aged_brie_and_backstage_passes(item)
-            else:
-              self._update_quality_all(item)
-            if item.name != self.SULFURAS:
-              item.sell_in = item.sell_in - self.DEFAULT_DEGRADE_SELL_IN
-            if item.sell_in < self.SELL_IN_ZERO:
-              self._update_quality_nagative_sell_in(item)
+            self._update_item_quality(item)
+            
+
                 
 
 
