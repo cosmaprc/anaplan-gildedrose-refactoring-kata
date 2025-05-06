@@ -30,3 +30,5 @@ coverage html
 9 - After careful refactoring of the affected fn, turns out the sulfuric item udpate stage did not need to use _update_quality_nagative_sell_in at all, so removed and code coverage is back at 100%.
 
 10 - Upon inspection of shared _update_quality_all between sulfuric and all other items expect the other special ones, I found that sulfuric does not need any update at all, which is in line with it's requirements and test so removing the function. Test still passing 100% and full coverage.
+
+11 - Upon another code review we find that _update_quality_aged_brie_and_backstage_passes still has a lot of logic in it that might be broken down or removed. Let's reafactor it and other functions at this point. SO at this point I've done a final refacroting where I've removed unused constants, renamed some functions whose purpose is more clear and we have a final refactoring project except for the last piece of new functionality we had to introduce.

@@ -23,7 +23,7 @@ class GildedRoseTest(unittest.TestCase):
   def test_update_quality_sell_by_date_passed(self):
     """Test for 'Requirement: Once the sell by date has passed, `Quality` degrades twice as fast'"""
     starting_sell_in = GildedRose.SELL_IN_ZERO
-    starting_quality = GildedRose.DOUBLE_DEFAULT_DEGRADE_QUALITY
+    starting_quality = GildedRose.DEFAULT_DEGRADE_QUALITY * 2
     item = Item(ITEM, starting_sell_in, starting_quality)
     gilded_rose = GildedRose((item,))
     gilded_rose.update_quality()
@@ -32,7 +32,7 @@ class GildedRoseTest(unittest.TestCase):
     # Check that item's sell_in value has been decremented by default value
     self.assertEqual(item.sell_in, starting_sell_in - GildedRose.DEFAULT_DEGRADE_SELL_IN)
     # Check that item's quality value has been decremented by double default value
-    self.assertEqual(item.quality, starting_quality - GildedRose.DOUBLE_DEFAULT_DEGRADE_QUALITY)
+    self.assertEqual(item.quality, starting_quality - GildedRose.DEFAULT_DEGRADE_QUALITY * 2)
   
   def test_update_quality_is_never_negative(self):
     """Test for 'Requirement: The Quality of an item is never negative'"""
@@ -73,7 +73,7 @@ class GildedRoseTest(unittest.TestCase):
           # Check that item's sell_in value has been decremented by default
           self.assertEqual(item.sell_in, days_left - GildedRose.DEFAULT_DEGRADE_SELL_IN)
           # Check that item's quality value has also increased by double the default
-          self.assertEqual(item.quality, starting_quality + GildedRose.DOUBLE_DEFAULT_DEGRADE_QUALITY)
+          self.assertEqual(item.quality, starting_quality + GildedRose.DEFAULT_DEGRADE_QUALITY * 2)
   
   def test_update_quality_max_quality(self):
     """Test for 'Requirement: The Quality of an item is never more than 50'"""
