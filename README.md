@@ -25,3 +25,5 @@ coverage html
 4 - Move big code blocks in functions
 5 - Move item processing into _update_item_quality fn
 6 - Start breaking out individual per item functionalityin own functions, startign with sulfuras
+7 - Break out age brie
+8 - break out backstage passes - here is wherre I realize the coverage ahs cahnged and there is now 1 function not covered
