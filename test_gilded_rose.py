@@ -10,6 +10,7 @@ SULFURAS = "Sulfuras, Hand of Ragnaros"
 BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
 
 # Sell in levels
+SELL_IN_ZERO = 0
 DEFAULT_DEGRADE_SELL_IN = 1
 
 # Quality levels
@@ -39,8 +40,8 @@ class GildedRoseTest(unittest.TestCase):
 
   def test_update_quality_sell_by_date_passed(self):
     """Test for 'Requirement: Once the sell by date has passed, `Quality` degrades twice as fast'"""
-    starting_sell_in = 0
-    starting_quality = 2
+    starting_sell_in = SELL_IN_ZERO
+    starting_quality = DOUBLE_DEFAULT_DEGRADE_QUALITY
     item = Item(ITEM, starting_sell_in, starting_quality)
     gilded_rose = GildedRose((item,))
     gilded_rose.update_quality()
@@ -53,7 +54,7 @@ class GildedRoseTest(unittest.TestCase):
   
   def test_update_quality_is_never_negative(self):
     """Test for 'Requirement: The Quality of an item is never negative'"""
-    starting_sell_in = 0
+    starting_sell_in = SELL_IN_ZERO
     starting_quality = DEFAULT_MIN_QUALITY
     item = Item(ITEM, starting_sell_in, starting_quality)
     # Ensure that item's quality value started at default min
@@ -73,7 +74,7 @@ class GildedRoseTest(unittest.TestCase):
     """
     for days_left in [1, 0]:
       with self.subTest(days_left=days_left):
-        starting_quality = 0
+        starting_quality = DEFAULT_MIN_QUALITY
         item = Item(AGED_BRIE, days_left, starting_quality)
         gilded_rose = GildedRose((item,))
         gilded_rose.update_quality()
@@ -94,7 +95,7 @@ class GildedRoseTest(unittest.TestCase):
   
   def test_update_quality_max_quality(self):
     """Test for 'Requirement: The Quality of an item is never more than 50'"""
-    starting_sell_in = 0
+    starting_sell_in = SELL_IN_ZERO
     starting_quality = DEFAULT_MAX_QUALITY
     item = Item(AGED_BRIE, starting_sell_in, starting_quality)
     # Ensure starting_quality is at default max value
@@ -110,7 +111,7 @@ class GildedRoseTest(unittest.TestCase):
 
   def test_update_quality_sulfuras(self):
     """Test for 'Requirement: "Sulfuras", being a legendary item, never has to be sold or decreases in Quality, its Quality is 80 and it never alters.'"""
-    starting_sell_in = 0
+    starting_sell_in = SELL_IN_ZERO
     starting_quality = SULFURAS_QUALITY
     item = Item(SULFURAS, starting_sell_in, starting_quality)
     gilded_rose = GildedRose((item,))
@@ -126,7 +127,7 @@ class GildedRoseTest(unittest.TestCase):
     - Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
     - Quality drops to 0 after the concert
     """
-    starting_sell_in = 0
+    starting_sell_in = SELL_IN_ZERO
     for days_left in list(reversed(range(starting_sell_in, BACKSTAGE_PASSES_LOW_DEGRADE_QUALITY_SELL_IN + 1))):
       with self.subTest(days_left=days_left):
         starting_quality = 1
@@ -166,9 +167,9 @@ class GildedRoseTest(unittest.TestCase):
 
 class ItemTest(unittest.TestCase):
   def test_repr(self):
-    starting_sell_in = 0
-    starting_quality = 0
-    item = Item(ITEM, 0, 0)
+    starting_sell_in = SELL_IN_ZERO
+    starting_quality = DEFAULT_MIN_QUALITY
+    item = Item(ITEM, starting_sell_in, starting_quality)
     self.assertEqual(repr(item), "%s, %s, %s" % (ITEM, starting_sell_in, starting_quality))
 
 if __name__ == '__main__':
