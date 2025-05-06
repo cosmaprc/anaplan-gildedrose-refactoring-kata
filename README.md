@@ -21,3 +21,7 @@ coverage html
 2 - The test class passes 100% and has all values used expressed as constants which we can now move into the calss under test and centralize these common values as well as give meaning to them.
 - Check coverage has not changed nor test resutls
 
+3 - Replace test constants with class constants
+4 - Move big code blocks in functions
+5 - Move item processing into _update_item_quality fn
+6 - Start breaking out individual per item functionalityin own functions, startign with sulfuras
