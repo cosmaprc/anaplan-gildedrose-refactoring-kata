@@ -38,15 +38,11 @@ class GildedRose(object):
     
     def _update_quality_all(self, item):
       if item.quality > self.DEFAULT_MIN_QUALITY:
-        if item.name != self.SULFURAS:
-          item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
+        item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
     
     def _update_quality_nagative_sell_in(self, item):
       if item.quality > self.DEFAULT_MIN_QUALITY:
         item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
-    
-    def _update_sulfuras_item(self, item):
-      self._update_quality_all(item)
     
     def _degrade_sell_in(self, item):
       item.sell_in = item.sell_in - self.DEFAULT_DEGRADE_SELL_IN
@@ -66,7 +62,8 @@ class GildedRose(object):
     
     def _update_item_quality(self, item):
       if item.name == self.SULFURAS:
-        self._update_sulfuras_item(item)
+        # No update needed based on Requirement: 
+        # "Sulfuras", being a legendary item, never has to be sold or decreases in Quality, its Quality is 80 and it never alters.
         return
       
       if item.name == self.AGED_BRIE:

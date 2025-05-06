@@ -27,4 +27,6 @@ coverage html
 6 - Start breaking out individual per item functionalityin own functions, startign with sulfuras
 7 - Break out age brie
 8 - break out backstage passes - here is wherre I realize the coverage ahs cahnged and there is now 1 function not covered - But it's ok since it's only in the sulfuras stage. 
-9 - This refactoring has shown that when broken down there are paths that might have been mnissed by tests otherwise. Let's add it in.
+9 - After careful refactoring of the affected fn, turns out the sulfuric item udpate stage did not need to use _update_quality_nagative_sell_in at all, so removed and code coverage is back at 100%.
+
+10 - Upon inspection of shared _update_quality_all between sulfuric and all other items expect the other special ones, I found that sulfuric does not need any update at all, which is in line with it's requirements and test so removing the function. Test still passing 100% and full coverage.
