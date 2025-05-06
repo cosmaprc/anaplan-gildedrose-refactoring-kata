@@ -3,7 +3,6 @@
 class GildedRose(object):
 
     # Items
-    ITEM = "foo"
     AGED_BRIE = "Aged Brie"
     SULFURAS = "Sulfuras, Hand of Ragnaros"
     BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
@@ -26,10 +25,11 @@ class GildedRose(object):
     def __init__(self, items):
         self.items = items
 
+
     def update_quality(self):
         for item in self.items:
-            if item.name !=self.AGED_BRIE and item.name != self.BACKSTAGE_PASSES:
-                if item.quality > self.DEFAULT_MIN_QUALITY:
+            if item.name != self.AGED_BRIE and item.name != self.BACKSTAGE_PASSES:
+                  if item.quality > self.DEFAULT_MIN_QUALITY:
                     if item.name != self.SULFURAS:
                         item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
             else:
