@@ -42,21 +42,11 @@ class GildedRose(object):
           item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
     
     def _update_quality_nagative_sell_in(self, item):
-      if item.name != self.AGED_BRIE:
-        if item.name != self.BACKSTAGE_PASSES:
-          if item.quality > self.DEFAULT_MIN_QUALITY:
-            if item.name != self.SULFURAS:
-              item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
-        else:
-          item.quality = self.DEFAULT_MIN_QUALITY
-      else:
-        if item.quality < self.DEFAULT_MAX_QUALITY:
-          item.quality = item.quality + self.DEFAULT_DEGRADE_QUALITY
+      if item.quality > self.DEFAULT_MIN_QUALITY:
+        item.quality = item.quality - self.DEFAULT_DEGRADE_QUALITY
     
     def _update_sulfuras_item(self, item):
       self._update_quality_all(item)
-      if item.sell_in < self.SELL_IN_ZERO:
-        self._update_quality_nagative_sell_in(item)
     
     def _degrade_sell_in(self, item):
       item.sell_in = item.sell_in - self.DEFAULT_DEGRADE_SELL_IN
@@ -65,13 +55,14 @@ class GildedRose(object):
       self._update_quality_aged_brie_and_backstage_passes(item)
       self._degrade_sell_in(item)
       if item.sell_in < self.SELL_IN_ZERO:
-        self._update_quality_nagative_sell_in(item)
+        if item.quality < self.DEFAULT_MAX_QUALITY:
+          item.quality = item.quality + self.DEFAULT_DEGRADE_QUALITY
     
     def _update_backstage_passes_item(self, item):
       self._update_quality_aged_brie_and_backstage_passes(item)
       self._degrade_sell_in(item)
       if item.sell_in < self.SELL_IN_ZERO:
-        self._update_quality_nagative_sell_in(item)
+        item.quality = self.DEFAULT_MIN_QUALITY
     
     def _update_item_quality(self, item):
       if item.name == self.SULFURAS:

@@ -26,4 +26,5 @@ coverage html
 5 - Move item processing into _update_item_quality fn
 6 - Start breaking out individual per item functionalityin own functions, startign with sulfuras
 7 - Break out age brie
-8 - break out backstage passes - here is wherre I realize the coverage ahs cahnged and there is now 1 function not covered
+8 - break out backstage passes - here is wherre I realize the coverage ahs cahnged and there is now 1 function not covered - But it's ok since it's only in the sulfuras stage. 
+9 - This refactoring has shown that when broken down there are paths that might have been mnissed by tests otherwise. Let's add it in.
