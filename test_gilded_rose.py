@@ -144,7 +144,7 @@ class GildedRoseTest(unittest.TestCase):
           # Check that item's quality value has dropped to default min
           self.assertEqual(item.quality, GildedRose.DEFAULT_MIN_QUALITY)
 
-  def test_update_quality_sulfuras(self):
+  def test_update_quality_conjured(self):
     """Test for 'New Requirement: "Conjured" items degrade in Quality twice as fast as normal items'"""
     starting_sell_in = 1
     starting_quality = GildedRose.DEFAULT_MAX_QUALITY
