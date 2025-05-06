@@ -6,6 +6,7 @@ class GildedRose(object):
     AGED_BRIE = "Aged Brie"
     SULFURAS = "Sulfuras, Hand of Ragnaros"
     BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
+    CONJURED = "Conjured"
 
     # Sell in levels
     SELL_IN_ZERO = 0
@@ -73,6 +74,10 @@ class GildedRose(object):
       if item.name == self.BACKSTAGE_PASSES:
         self._update_backstage_passes_item(item)
         return
+      
+      if item.name == self.CONJURED:
+        # Continue after degrading quality once
+        self._degrade_quality(item)
         
       self._degrade_quality(item)
       self._degrade_sell_in(item)

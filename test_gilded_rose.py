@@ -5,7 +5,6 @@ from gilded_rose import Item, GildedRose
 
 # Items
 ITEM = "foo"
-CONJURED = "Conjured"
 
 class GildedRoseTest(unittest.TestCase):
   def test_update_quality_lowers_item_values(self):
@@ -148,11 +147,11 @@ class GildedRoseTest(unittest.TestCase):
     """Test for 'New Requirement: "Conjured" items degrade in Quality twice as fast as normal items'"""
     starting_sell_in = 1
     starting_quality = GildedRose.DEFAULT_MAX_QUALITY
-    item = Item(CONJURED, starting_sell_in, starting_quality)
+    item = Item(GildedRose.CONJURED, starting_sell_in, starting_quality)
     gilded_rose = GildedRose((item,))
     gilded_rose.update_quality()
     # Check item has the expected state
-    self.assertEqual(CONJURED, item.name)
+    self.assertEqual(GildedRose.CONJURED, item.name)
     # Check that the item's sell_in value has been decremented by defaults
     self.assertEqual(item.sell_in, starting_sell_in - GildedRose.DEFAULT_DEGRADE_SELL_IN)
     # Check that the item's quality value has been decremented twice as fast as default
